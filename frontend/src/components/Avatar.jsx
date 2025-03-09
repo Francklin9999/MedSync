@@ -23,8 +23,8 @@ const corresponding = {
 
 export function Avatar(props) {
   const { playAudio, script, headFollow, smoothMorphTarget, morphTargetSmoothing, } = useControls({
-    playAudio: false,
-    headFollow: true,
+    playAudio: true,
+    headFollow: false,
     smoothMorphTarget: true,
     morphTargetSmoothing: 0.5,
     script: {
@@ -33,14 +33,14 @@ export function Avatar(props) {
     },
   });
 
-  const audio = useMemo(() => new Audio(`./audios/${script}.mp3`), [script]);
-  const jsonFile = useLoader(THREE.FileLoader, `audios/${script}.json`);
+  const audio = useMemo(() => new Audio(`./audios/${script.value}.mp3`), [script]);
+  const jsonFile = useLoader(THREE.FileLoader, `audios/intro.json`);
   const lipsync = JSON.parse(jsonFile);
 
   useFrame(() => {
     const currentAudioTime = audio.currentTime;
     if (audio.paused || audio.ended) {
-      setAnimation("Idle");
+      // setAnimation("Idle");
       return;
     }
 
@@ -125,6 +125,7 @@ export function Avatar(props) {
       }
     }
   });
+  
 
   useEffect(() => {
     nodes.Wolf3D_Head.morphTargetInfluences[
@@ -149,19 +150,19 @@ export function Avatar(props) {
   const { nodes, materials } = useGLTF('/models/67cb51fbb1e6cf0235078f9e.glb');
   const { animations: idleAnimation } = useFBX("animations/Idle.fbx");
   const { animations: talkingAnimation } = useFBX("animations/Talking.fbx");
-  const { animations: thinkinLeftAnimation } = useFBX("animations/Thinking.fbx");
+  const { animations: thinkingAnimation } = useFBX("animations/Thinking.fbx");
   // const { animations: thinkingRigthAnimation } = useFBX("animations/ThinkingRight.fbx");
 
   idleAnimation[0].name = "Idle";
   talkingAnimation[0].name = "Talking";
-  thinkinLeftAnimation[0].name = "ThinkinLeft";
+  thinkingAnimation[0].name = "Thinking";
   // thinkingRigthAnimation[0].name = "ThinkingRight";
 
   const [animation, setAnimation] = useState("Talking");
 
   const group = useRef();
   const { actions } = useAnimations(
-    [idleAnimation[0], talkingAnimation[0], thinkinLeftAnimation[0]],
+    [idleAnimation[0], talkingAnimation[0], thinkingAnimation[0]],
     group
   );
 

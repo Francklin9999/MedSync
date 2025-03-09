@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
 import os
-from chat import query_database, add_documents_to_vstore
+from chat import add_documents_to_vstore
+from audio import get_audio
 from fetch import get_doc_content
-
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 project_root = os.path.abspath(os.path.dirname(__file__))
 
@@ -12,7 +14,7 @@ project_root = os.path.abspath(os.path.dirname(__file__))
 def home():
     return "/"
 
-@app.route('update_db', methods=['POST'])
+@app.route('/update_db', methods=['POST'])
 def update_vetor_db():
     try:
         form_data = request.form
@@ -29,13 +31,15 @@ def update_vetor_db():
         return jsonify({"message": f"An error occurred: {str(e)}"}), 500
 
     
-@app.route('query_db', methods=['POST'])
+@app.route('/query_db', methods=['POST'])
 def query_db():
     try:
-        form_data = request.form
+        form_data = request.get_json()
+        print(form_data)
         keywords = form_data["query"]
+        print(keywords)
         
-        result = query_database(keywords)
+        result = get_audio(keywords)
         
         if result:
             return jsonify({"message": result}), 200
@@ -44,6 +48,7 @@ def query_db():
 
     except Exception as e:
         return jsonify({"message": "I'm sorry, there was an issue processing your request. Please try again later."}), 500
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
