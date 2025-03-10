@@ -22,27 +22,46 @@ const corresponding = {
 };
 
 export function Avatar(props) {
-  const { playAudio, script, headFollow, smoothMorphTarget, morphTargetSmoothing, } = useControls({
-    playAudio: true,
-    headFollow: false,
+  const {
+    playAudio,
+    script,
+    headFollow,
+    smoothMorphTarget,
+    morphTargetSmoothing,
+  } = useControls({
+    playAudio: false,
+    headFollow: true,
     smoothMorphTarget: true,
     morphTargetSmoothing: 0.5,
     script: {
       value: "intro",
-      options: ["intro"]
+      options: ["intro"],
     },
   });
 
-  const audio = useMemo(() => new Audio(`./audios/${script.value}.mp3`), [script]);
-  const jsonFile = useLoader(THREE.FileLoader, `audios/intro.json`);
-  const lipsync = JSON.parse(jsonFile);
+  const [audio, setAudio] = useState(new Audio(`http://127.0.0.1:5000/audios/message_0.wav`));
+  const jsonFile = useLoader(THREE.FileLoader, `audios/${script}.json`);
+  const [lipsync, setLipSync] = useState(JSON.parse(jsonFile));
+  const [animation, setAnimation] = useState("Idle");
+  
+
+  useEffect(() => {
+    setAnimation(props?.message?.animation)
+    if (props?.message?.lipsync) {
+      setLipSync(JSON.parse(props?.message?.lipsync))
+    }
+    setAudio(new Audio(`http://127.0.0.1:5000/audios/message_0.wav`));
+    // audio.play();
+    setAnimation("Talking;")
+    console.log(props.message);
+  }, [props])
 
   useFrame(() => {
     const currentAudioTime = audio.currentTime;
-    if (audio.paused || audio.ended) {
-      // setAnimation("Idle");
-      return;
-    }
+    // if (audio.paused || audio.ended) {
+    //   setAnimation("Idle");
+    //   return;
+    // }
 
     Object.values(corresponding).forEach((value) => {
       if (!smoothMorphTarget) {
@@ -136,7 +155,7 @@ export function Avatar(props) {
     ] = 1;
     if (playAudio) {
       audio.play();
-      if (script === "intro") {
+      if (script === "intro" || script === "message_0") {
         setAnimation("Talking");
       } else {
         setAnimation("Thinking");
@@ -158,8 +177,6 @@ export function Avatar(props) {
   thinkingAnimation[0].name = "Thinking";
   // thinkingRigthAnimation[0].name = "ThinkingRight";
 
-  const [animation, setAnimation] = useState("Talking");
-
   const group = useRef();
   const { actions } = useAnimations(
     [idleAnimation[0], talkingAnimation[0], thinkingAnimation[0]],
@@ -167,7 +184,7 @@ export function Avatar(props) {
   );
 
   useEffect(() => {
-    actions[animation].reset().fadeIn(0.5).play();
+    actions[animation]?.reset().fadeIn(0.5).play();
     return () => actions[animation]?.reset().fadeOut(0.5);
   }, [animation]);
 

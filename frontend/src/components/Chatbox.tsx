@@ -49,7 +49,7 @@ const ChatbotFullScreen: React.FC = () => {
               MediSync Virtual Assistant
           </h2>
       </div>
-      <div>{sceneData?.message?.text}</div>
+      <div className="chatbot-message">{sceneData?.message?.text}</div>
       <div className="chatbot-content">
         <Leva />
         <Scene data={sceneData} />

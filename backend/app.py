@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import os
 from chat import add_documents_to_vstore
 from audio import get_audio
@@ -49,6 +49,10 @@ def query_db():
     except Exception as e:
         return jsonify({"message": "I'm sorry, there was an issue processing your request. Please try again later."}), 500
     
+@app.route('/audios/<filename>')
+def serve_audio(filename):
+    audios_folder = os.path.join(app.root_path, 'audios')
+    return send_from_directory(audios_folder, filename)
 
 if __name__ == "__main__":
     app.run(debug=True)
