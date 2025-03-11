@@ -1,47 +1,41 @@
-# Java Getting Started (Maven)
+# Healthcare AI Agent - Full-Stack Application
 
-A barebones Java app, which can easily be deployed to Heroku.
+## 🚀 Project Overview
+We built a **Healthcare AI Agent** using **RAG (Retrieval-Augmented Generation)** in just **24 hours** at UdemHacks. Our solution integrates AI with a full-stack application to provide ethical and accurate healthcare information.
 
-This application supports the tutorials for both the [Cedar and Fir generations](https://devcenter.heroku.com/articles/generations) of the Heroku platform. You can check them out here:
+## 🛠️ Technologies Used
+- **Python**
+- **LangChain**
+- **AstroDB**
+- **Gemini API**
+- **HuggingFace**
+- **Java**
+- **React**
+- **ThreeJS**
 
-- [Getting Started on Heroku with Java](https://devcenter.heroku.com/articles/getting-started-with-java)
-- [Getting Started on Heroku Fir with Java (Maven)](https://devcenter.heroku.com/articles/getting-started-with-java-maven-fir)
+## 📋 Features
+### AI Agent & Healthcare Data
+- Integrated **RAG** to improve LLM responses.
+- Retrieved medical data from **NCBI** for improved context.
+- Stored data in a **vector database** to enhance query performance.
 
-## Deploying to Heroku
+### Full-Stack Application
+- Health tracking (e.g., blood pressure, heart rate).
+- Appointment booking and notifications.
+- **Fitbit** integration for seamless health data synchronization.
 
-Using resources for this example app counts towards your usage. [Delete your app](https://devcenter.heroku.com/articles/heroku-cli-commands#heroku-apps-destroy) and [database](https://devcenter.heroku.com/articles/heroku-postgresql#removing-the-add-on) as soon as you are done experimenting to control costs.
+### 3D Doctor Interface
+- Built a **ThreeJS**-based 3D interface for interactive AI responses.
 
-### Deploy on Heroku [Cedar](https://devcenter.heroku.com/articles/generations#cedar)
+## 🏆 Achievements
+- Placed **3rd** at **UdemHacks**!
+- Successfully built a fully functional AI + full-stack solution in just 24 hours.
 
-By default, apps use Eco dynos if you are subscribed to Eco. Otherwise, it defaults to Basic dynos. The Eco dynos plan is shared across all Eco dynos in your account and is recommended if you plan on deploying many small apps to Heroku. Learn more about our low-cost plans [here](https://blog.heroku.com/new-low-cost-plans).
+## 📸 Screenshots
+<img width="955" alt="Screenshot 2025-03-10 091008" src="https://github.com/user-attachments/assets/9c2fdded-675f-4854-9644-94e199e8fd62" />
+![gallery (1)](https://github.com/user-attachments/assets/a5e93fc7-6a27-45c8-8a12-78e105d2d771)
+![gallery (2)](https://github.com/user-attachments/assets/acfca4cf-8c9a-46a7-8c74-6ea2f0549e9e)
+![gallery (3)](https://github.com/user-attachments/assets/9331a755-7f01-4cfe-9e3f-af669bd2cafb)
+<img width="1430" alt="original" src="https://github.com/user-attachments/assets/259f1010-89d1-4cb2-b202-ef9626e4a8bd" />
+![gallery](https://github.com/user-attachments/assets/fc352cf6-1f1f-45e7-8692-d7ab08cf15bc)
 
-Eligible students can apply for platform credits through our new [Heroku for GitHub Students program](https://blog.heroku.com/github-student-developer-program).
-
-```text
-$ git clone https://github.com/heroku/java-getting-started
-$ cd java-getting-started
-$ heroku create
-$ git push heroku main
-$ heroku open
-```
-
-### Deploy on Heroku [Fir](https://devcenter.heroku.com/articles/generations#fir)
-
-By default, apps on [Fir](https://devcenter.heroku.com/articles/generations#fir) use 1X-Classic dynos. To create an app on [Fir](https://devcenter.heroku.com/articles/generations#fir) you'll need to
-[create a private space](https://devcenter.heroku.com/articles/working-with-private-spaces#create-a-private-space)
-first.
-
-```text
-$ git clone https://github.com/heroku/java-getting-started
-$ cd java-getting-started
-$ heroku create --space <space-name>
-$ git push heroku main
-$ heroku ps:wait
-$ heroku open
-```
-
-## Documentation
-
-For more information about using Java on Heroku, see these Dev Center articles:
-
-- [Java on Heroku](https://devcenter.heroku.com/categories/java)
