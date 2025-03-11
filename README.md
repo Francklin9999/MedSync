@@ -1,4 +1,4 @@
-# Healthcare AI Agent - Full-Stack Application
+# Healthcare AI Agent - Full-Stack Application (24 hours)
 
 ## 🚀 Project Overview
 We built a **Healthcare AI Agent** using **RAG (Retrieval-Augmented Generation)** in just **24 hours** at UdemHacks. Our solution integrates AI with a full-stack application to provide ethical and accurate healthcare information.
